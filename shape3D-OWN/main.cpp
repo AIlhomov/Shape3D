@@ -19,6 +19,8 @@ int main() {
 
 	s.removeBox(10.f, 20.f, 30.f);
 
+	s.removeCylinder(4.f, 5.f, "Vertical");
+
 	s.showEverything();
 	cout << endl;
 	//cout << endl << "All average heights: " << s.averageValueHeightAll() << endl;

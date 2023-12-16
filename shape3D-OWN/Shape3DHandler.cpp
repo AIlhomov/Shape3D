@@ -30,24 +30,17 @@ bool Shape3DHandler::removeBox(float height, float length, float width)
 {
 	for (int i = 0; i < nrOfShapes; i++) {
 		Box* b = dynamic_cast<Box*>(shapes[i]);
-		if (b) {
-			Box* temp = new Box(height, length, width);
+		if (b && b->getHeight() == height && b->getLength() == length && b->getWidth() == width) {
 
-			if (shapes[i]->volume() == temp->volume()) {
-				cout << "JAAAA";
-				delete shapes[i];
+			delete shapes[i];
 
-				shapes[i] = shapes[nrOfShapes];
-				shapes[nrOfShapes] = nullptr;
-				this->nrOfShapes--;
+			shapes[i] = shapes[nrOfShapes - 1];
+			shapes[nrOfShapes - 1] = nullptr;
+			this->nrOfShapes--;
 
-
-				delete temp;
-				return true;
-			}
+			return true;
 		}
 	}
-	
 
 	return false;
 }
@@ -57,12 +50,10 @@ bool Shape3DHandler::removeCylinder(float height, float radius, const string& or
 	for (int i = 0; i < nrOfShapes; i++) {
 		Cylinder* cyl = dynamic_cast<Cylinder*>(shapes[i]);
 		if (cyl) {
-			Cylinder* temp = new Cylinder(height, radius, orientering);
-			if (shapes[i] == temp) {
+			if (shapes[i] == cyl) {
 				delete shapes[i];
-				shapes[i] = shapes[nrOfShapes];
-				shapes[nrOfShapes] = nullptr;
-				delete temp;
+				shapes[i] = shapes[nrOfShapes--];
+				shapes[nrOfShapes--] = nullptr;
 				return true;
 			}
 		}
@@ -167,6 +158,7 @@ void Shape3DHandler::showEverything()
 		//cout << shapes[i]->clone()->toString();
 	}
 }
+
 
 void Shape3DHandler::deleteEverything()
 {

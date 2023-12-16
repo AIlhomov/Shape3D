@@ -55,6 +55,11 @@ Box* Box::clone() const
 	return new Box(*this);
 }
 
+bool Box::operator==(const Box& other)
+{
+	return (this->length == other.length && this->width == other.width && Shape3D::getHeight() == other.getHeight());
+}
+
 Box::~Box()
 {
 }

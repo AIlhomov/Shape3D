@@ -23,5 +23,7 @@ public:
 	string toString() const override;
 	Box* clone() const override;
 
+	bool operator==(const Box& other); //extra?
+
 	virtual ~Box();
 };
