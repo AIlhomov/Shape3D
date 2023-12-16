@@ -16,6 +16,7 @@ Cylinder::Cylinder(float radius, const string& orientering)
 }
 
 Cylinder::Cylinder(float height, float radius, const string& orientering)
+	: Shape3D(height), radius(radius), orientering(orientering)
 {
 }
 

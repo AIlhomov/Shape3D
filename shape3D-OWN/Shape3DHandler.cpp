@@ -13,9 +13,7 @@ Shape3DHandler::~Shape3DHandler()
 {
 	for (int i = 0; i < nrOfShapes; i++) {
 		delete shapes[i];
-		//shapes[i] = nullptr;
 	}
-	//delete[] shapes;
 }
 
 void Shape3DHandler::addBox(float height, float length, float width)
@@ -35,16 +33,18 @@ bool Shape3DHandler::removeBox(float height, float length, float width)
 		if (b) {
 			Box* temp = new Box(height, length, width);
 
-			if (shapes[i] == temp) {
+			if (shapes[i]->volume() == temp->volume()) {
+				cout << "JAAAA";
 				delete shapes[i];
 
 				shapes[i] = shapes[nrOfShapes];
 				shapes[nrOfShapes] = nullptr;
+				this->nrOfShapes--;
+
 
 				delete temp;
 				return true;
 			}
-
 		}
 	}
 	
@@ -161,7 +161,10 @@ float Shape3DHandler::averageValueHeightCylinder() const
 void Shape3DHandler::showEverything()
 {
 	for (int i = 0; i < nrOfShapes; i++) {
-		cout << shapes[i]->clone()->toString();
+
+		cout << shapes[i]->toString() << endl;
+
+		//cout << shapes[i]->clone()->toString();
 	}
 }
 
@@ -170,7 +173,7 @@ void Shape3DHandler::deleteEverything()
 	for (int i = 0; i < nrOfShapes; i++) {
 		delete shapes[i];
 	}
-	delete[] shapes;
+	//delete[] shapes; cant remove static allocated array
 	this->nrOfShapes = 0;
 
 }
