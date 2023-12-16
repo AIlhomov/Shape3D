@@ -25,6 +25,7 @@ public:
 	//assignment operator
 	Shape3DHandler operator=(const Shape3DHandler& other);
 
+
 	int nrOfBoxes() const;
 	int nrOfCylinders() const;
 
